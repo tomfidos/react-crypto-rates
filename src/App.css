@@ -1,0 +1,22 @@
+.App {
+  width: 100%;
+  text-align: center;
+  background-color: white;
+}
+
+.App header {
+  background-color: black;
+  color: white;
+  margin: 1em;
+  padding-top: 1em;
+  height: 15em;
+}
+
+.App header img {
+  margin-top: 2em;
+}
+
+.App header h1 {
+  margin-top: 2em;
+  text-transform: capitalize;
+}
