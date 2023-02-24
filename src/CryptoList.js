@@ -3,11 +3,16 @@ import React from 'react';
 import './CryptoList.css';
 
 const CryptoList = (props) => {
-    const rateList = props.rateList.map(currency => <li key={currency.id}>Last rate: <span className="rate">{currency.rate} </span><span className="symbol">{currency.name} {currency.symbol}</span></li>);
+    const rates = props.rates;
+    const rateCollection = [];
+    for (const sym in rates) {
+        const rate = rates[sym];
+        rateCollection.push(<li key={rate.id}>Last rate: <span className="rate">{rate.rate} {rate.direction} </span><span className="symbol">{rate.name} {rate.symbol}</span></li>);
+    }
 
     return(
         <ul>
-            {rateList}
+            {rateCollection}
         </ul>
     );
 } 
