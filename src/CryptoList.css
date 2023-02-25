@@ -1,7 +1,8 @@
 ul {
     padding: 0;
     padding-top: 1.5em;
-    width: 100%;
+    width: 60%;
+    margin: auto;
 }
 
 li {
@@ -11,6 +12,11 @@ li {
     font-size: large;
     border: 1px solid darkgray;
     font-weight: 800;
+}
+
+.rate {
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 .red {
