@@ -38,7 +38,7 @@ class Crypto extends Component {
                 }
                 ticker['id'] = Date.now().toString() + '_' + data[sym].symbol;
                 ticker['name'] = sym;
-                ticker['symbol'] = '';  // TODO
+                ticker['symbol'] = this.getSymbol();
                 ticker['rate'] = lastRate;
             }
             this.setState(() => {
@@ -49,17 +49,19 @@ class Crypto extends Component {
         });
     }
 
+    getSymbol = () => {
+
+    }
+
     componentDidMount() {
         this.getRates();
         console.log('component mounted');
-    }
-
-    componentDidUpdate() {
+        this.timerId = setInterval(() => this.getRates(), 5000);
     }
 
     componentWillUnmount() {
         clearInterval(this.timerId);
-        console.log('compenent unmounted');
+        console.log('component unmounted');
     }
 
     render() {
