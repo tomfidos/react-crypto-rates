@@ -21,16 +21,25 @@ class Crypto extends Component {
             for (let sym in data) {
                 if (!currentRates.hasOwnProperty(sym)) {
                     currentRates[sym] = {};
-                    currentRates[sym]['direction'] = '';
                     currentRates[sym]['rate'] = 0;
                 }
-                const currentRate = currentRates[sym]['rate'];
+                const ticker = currentRates[sym];
+                const currentRate = ticker['rate'];
                 const lastRate = data[sym].last;
-                currentRates[sym]['id'] = Date.now().toString() + '_' + data[sym].symbol;
-                currentRates[sym]['name'] = sym;
-                currentRates[sym]['symbol'] = '';  // TODO
-                currentRates[sym]['direction'] = currentRate < lastRate * 0.999 ? 'down' : currentRate > lastRate * 1.001 ? 'up' : 'stable';  // TODO
-                currentRates[sym]['rate'] = lastRate;
+                if (currentRate < lastRate) {
+                    ticker['direction'] = String.fromCharCode(8593);
+                    ticker['class'] = 'green';
+                } else if (currentRate > lastRate) {
+                    ticker['direction'] = String.fromCharCode(8595);
+                    ticker['class'] = 'red';
+                } else {
+                    ticker['direction'] = String.fromCharCode(8596);
+                    ticker['class'] = 'blue';
+                }
+                ticker['id'] = Date.now().toString() + '_' + data[sym].symbol;
+                ticker['name'] = sym;
+                ticker['symbol'] = '';  // TODO
+                ticker['rate'] = lastRate;
             }
             this.setState(() => {
                 return({
