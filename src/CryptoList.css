@@ -12,3 +12,15 @@ li {
     border: 1px solid darkgray;
     font-weight: 800;
 }
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
