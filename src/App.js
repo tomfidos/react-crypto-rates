@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './bitcoin_logo.png';
 import Crypto from './Crypto';
 
 
@@ -6,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <img alt="BTC logo"></img>
+        <img src={logo} className="logo" alt="BTC logo"></img>
         <h1>crypto rate</h1>
       </header>
       <Crypto/>
