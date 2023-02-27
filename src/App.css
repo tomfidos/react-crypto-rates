@@ -12,8 +12,24 @@
   height: 15em;
 }
 
-.App header img {
+.App .logo {
   margin-top: 2em;
+  height: 10vmin;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App .logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App header h1 {
