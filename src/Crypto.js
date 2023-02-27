@@ -38,7 +38,6 @@ class Crypto extends Component {
                 }
                 ticker['id'] = Date.now().toString() + '_' + data[sym].symbol;
                 ticker['name'] = sym;
-                ticker['symbol'] = this.getSymbol();
                 ticker['rate'] = lastRate;
             }
             this.setState(() => {
@@ -47,10 +46,6 @@ class Crypto extends Component {
                 });
             });
         });
-    }
-
-    getSymbol = () => {
-
     }
 
     componentDidMount() {
