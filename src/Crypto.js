@@ -11,6 +11,7 @@ class Crypto extends Component {
         super(props);
         this.state = {
             rates: {},
+            areCurrenciesFiltered: false,
         };
     }
 
@@ -18,10 +19,15 @@ class Crypto extends Component {
         axios.get(baseUrl, {mode: 'cors'}).then(respone => {
             const data = respone.data;
             const currentRates = this.state.rates;
+
             for (let sym in data) {
-                if (!currentRates.hasOwnProperty(sym)) {
-                    currentRates[sym] = {};
-                    currentRates[sym]['rate'] = 0;
+                if (!this.state.areCurrenciesFiltered) {
+                    if (!currentRates.hasOwnProperty(sym)) {
+                        currentRates[sym] = {};
+                        currentRates[sym]['rate'] = 0;
+                    }
+                } else if (!currentRates.hasOwnProperty(sym)) {
+                    continue;
                 }
                 const ticker = currentRates[sym];
                 const currentRate = ticker['rate'];
@@ -40,6 +46,7 @@ class Crypto extends Component {
                 ticker['name'] = sym;
                 ticker['rate'] = lastRate;
             }
+
             this.setState(() => {
                 return({
                     rates: currentRates,
@@ -59,10 +66,31 @@ class Crypto extends Component {
         console.log('component unmounted');
     }
 
+    filterCurrencies = (event) => {
+        const currentRates = this.state.rates;
+        const symbol = event.target.value.trim().toUpperCase();
+        const filteredRates = Object.fromEntries(Object.entries(currentRates)
+            .filter(([key]) => key.includes(symbol)));
+        if (Object.keys(filteredRates).length > 0 && symbol !== '') {
+            this.setState(() => {
+                return({
+                    rates: filteredRates,
+                    areCurrenciesFiltered: true,
+                });
+            });
+        } else {
+            this.setState(() => {
+                return({
+                    areCurrenciesFiltered: false,
+                });
+            });
+        }
+    }
+
     render() {
         return(
             <div>
-               <input type="text" placeholder='Filter'/> 
+               <input type="text" placeholder='Filter' onChange={this.filterCurrencies}/> 
                <CryptoList rates={this.state.rates}/>
             </div>
         );

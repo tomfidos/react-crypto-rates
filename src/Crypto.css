@@ -3,4 +3,5 @@ input {
     font-size: x-large;
     border: 3px solid lightblue;
     padding: 0.5em;
+    text-transform: uppercase;
 }
